@@ -1,15 +1,13 @@
-# 使用穩定的 Java 8 Runtime
+# 1) Build stage: 直接在容器內完成 Maven 打包，避免缺少 target/*.jar
+FROM maven:3.9.6-eclipse-temurin-8 AS build
+WORKDIR /workspace
+COPY pom.xml .
+COPY src ./src
+RUN mvn -B clean package -DskipTests
+
+# 2) Runtime stage: 精簡 JRE 8 來執行打包好的 Spring Boot 應用
 FROM eclipse-temurin:8-jre
-
-# 設定容器內工作目錄
 WORKDIR /app
-
-# 將 Spring Boot 打包好的 jar 複製進來
-# 這裡用萬用字元，避免每次改版本號
-COPY target/*.jar app.jar
-
-# Spring Boot 預設 port
+COPY --from=build /workspace/target/*.jar app.jar
 EXPOSE 8080
-
-# 啟動 Spring Boot
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
