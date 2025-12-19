@@ -6,9 +6,9 @@ on:
       - main
 
 env:
-  PROJECT_ID: your-gcp-project-id
+  PROJECT_ID: synthetic-howl-319906
   REGION: asia-east1
-  SERVICE_NAME: helloworld-api
+  SERVICE_NAME: helloworld
   IMAGE_NAME: helloworld
 
 jobs:
