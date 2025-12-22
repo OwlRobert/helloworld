@@ -10,7 +10,7 @@ public class HelloController {
     @Operation(summary = "Hello World API")
     @GetMapping("/hello")
     public String hello() {
-        return "Hello World from Spring Boot!, 2025/12/22";
+        return "Hello World from Spring Boot!, 2025/12/22, Happy New Year!";
     }
 
     @GetMapping("/health")
