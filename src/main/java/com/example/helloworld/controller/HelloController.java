@@ -12,4 +12,9 @@ public class HelloController {
     public String hello() {
         return "Hello World from Spring Boot!, 2025/12/22";
     }
+
+    @GetMapping("/health")
+public String health() {
+    return "OK";
+}
 }
